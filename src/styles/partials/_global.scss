@@ -1,0 +1,35 @@
+@use "./fonts" as *;
+@use "./variables" as *;
+@use "./mixins" as *;
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    // font-size: 1.6em;
+    // font-family: 'Nunito Sans', sans-serif;
+    // font-weight: 300;
+    @include text-style (1.6rem, 300, 2.3rem); 
+    color: rgb(27, 27, 27);
+}
+
+p {
+    @include text-style (1.8rem, 300, 2.3rem); 
+    margin: 0;
+    padding:0;
+    
+    @include tablet {
+      @include text-style (2rem, 300, 2.5rem);
+    }
+    
+    // @include desktop {
+    //   @include text-style (2rem, 300, 2.25rem); 
+    // }
+  }
