@@ -1,13 +1,13 @@
 import './App.scss'
 import Header from './components/Header/Header'
-import MainDisplay from './components/MainDisplay/MainDisplay'
+import MainDisplayPage from './pages/MainDisplayPage/MainDisplayPage'
 
 function App() {
 
   return (
       <>
         <Header></Header>
-        <MainDisplay></MainDisplay>
+        <MainDisplayPage></MainDisplayPage>
         
       </>
   )

@@ -1,7 +1,9 @@
+import CountryCard from '../CountryCard/CountryCard';
 import './MainDisplay.scss';
 
-function MainDisplay () {
-    console.log("dbsjbck");
+// eslint-disable-next-line react/prop-types
+function MainDisplay ({list}) {
+    console.log(list);
 
     return (
         <section className="display">
@@ -15,6 +17,7 @@ function MainDisplay () {
 
             </section>
             <section className="display__items">
+                <CountryCard list = {list}></CountryCard>
 
             </section>
         </section>
