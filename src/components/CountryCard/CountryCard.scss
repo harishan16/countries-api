@@ -1,0 +1,20 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.single-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width:100%;
+
+    @include tablet {
+        flex-direction: row;
+        width: 50%;
+
+    }
+
+    @include desktop {
+        // width: 33%;
+    }
+}
