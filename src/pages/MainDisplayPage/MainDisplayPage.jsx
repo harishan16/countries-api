@@ -1,5 +1,6 @@
 import axios from 'axios';
 import MainDisplay from '../../components/MainDisplay/MainDisplay';
+// import CountryDetails from '../../components/CountryDetails/CountryDetails';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -10,9 +11,17 @@ function MainDisplayPage () {
     const [countriesList, setCountriesList] = useState([]);
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedRegion, setSelectedRegion] = useState("All");
+    const [regionBased, setRegionBased] = useState([]);
 
+    const handleSelectedRegion = (region) => {
+        console.log(region);
+        setSelectedRegion(region);
+    }
+
+    // Fetch all countries list
     useEffect(() => {
-        const getAll = async () => {
+        const getAllCountries = async () => {
             try {
                 const {data} = await axios.get(url);
                 setCountriesList(data);
@@ -22,11 +31,35 @@ function MainDisplayPage () {
             catch (error) {
                 setIsError(true);
                 console.log(`Could not fetch data ${error}`);
-
             }
         }
-        getAll();
+        getAllCountries();
     }, [])
+
+    // Fetch countries based on selected region
+    useEffect(() => {
+        if(selectedRegion == "All"){
+            setRegionBased(countriesList);
+        }
+        else {
+            const getRegionBased = async () => {
+                try {
+                    const {data} = await axios.get(`https://restcountries.com/v3.1/region/${selectedRegion}`);
+                    setRegionBased(data);
+                    setIsError(false);
+                    setIsLoading(false);
+                }
+                catch (error) {
+                    setIsError(true);
+                    console.log(`Could not fetch data ${error}`);
+
+                }
+            }
+            getRegionBased();
+        }
+    }, [selectedRegion, countriesList]);
+
+  
 
     if(isError) {
         return <h1>Sorry, there was an error fetching the data</h1>
@@ -38,7 +71,8 @@ function MainDisplayPage () {
 
     return (
         <>
-        <MainDisplay list = {countriesList}></MainDisplay>
+        <MainDisplay list = {regionBased} selectedRegion= {handleSelectedRegion} countriesList={countriesList}></MainDisplay>
+        {/* <CountryDetails></CountryDetails> */}
         </>
 
     )
