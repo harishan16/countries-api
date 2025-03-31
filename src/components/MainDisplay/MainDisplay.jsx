@@ -28,6 +28,7 @@ function MainDisplay ({list, selectedRegion, countriesList, countrySearched}) {
     // Function to handle region filter dropdown 
     const handleRegionFilter = (event) => {
         event.preventDefault();
+        setCountrySearch('');
         const selectedValue = event.target.value;
         console.log(event.target.value);
         setRegion(selectedValue);
@@ -37,6 +38,7 @@ function MainDisplay ({list, selectedRegion, countriesList, countrySearched}) {
     // Function to handle searching a country 
     const handleCountrySearch = (event, value) => {
         console.log(value);
+        setRegion('');
         setCountrySearch(value);
         countrySearched(value);
     }
@@ -49,6 +51,7 @@ function MainDisplay ({list, selectedRegion, countriesList, countrySearched}) {
                                 disablePortal 
                                 options={countries}
                                 onChange={handleCountrySearch}
+                                value={countrySearch}
                                 sx={{ width: { xs: "100%", sm: "100%", md: "60%"}}}
                                 renderInput={(params) => <TextField {...params} label="Search a Country Name" />}
                         >

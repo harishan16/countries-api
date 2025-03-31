@@ -6,11 +6,18 @@ import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 // import Grid from '@mui/material/Grid';
+import { BrowserRouter, Routes, Route, Link , useNavigate} from 'react-router-dom';
+// import { Link } from re÷
 
 
 
 // eslint-disable-next-line react/prop-types
 function CountryCard ({list}) {
+    let navigate = useNavigate();
+
+    const handleCountrySelect = () => {
+        navigate('/country-info');
+    }
 
     return (
              <Container disableGutters maxWidth="xl" sx={{ pt: 2, pb: 2 }}>
@@ -22,7 +29,7 @@ function CountryCard ({list}) {
                             {/* return ( */}
                                     
                                     <Card  sx={{ boxShadow: '0 0 12px  rgba(0, 0, 0, 0.1)' , borderRadius: 2 , }}>
-                                        <CardActionArea>
+                                        <CardActionArea onClick={handleCountrySelect}>
                                             <CardMedia component="img" sx={{ height: "30vh"}} image={country.flags.svg} alt={`${country.name.common} flag`}/>
                                             <CardContent>
                                                 <Typography component="div" variant="h4" sx={{ fontWeight: 'bold', py:2}}>{country.name.official}</Typography>
