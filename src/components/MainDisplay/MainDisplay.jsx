@@ -11,10 +11,10 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
 // eslint-disable-next-line react/prop-types
-function MainDisplay ({list, selectedRegion, countriesList}) {
+function MainDisplay ({list, selectedRegion, countriesList, countrySearched}) {
 
     const [region, setRegion] = useState("");
-    const [inputValue, setInputValue] = useState("");
+    const [countrySearch, setCountrySearch] = useState("");
 
     // To extract unique regions
     // eslint-disable-next-line react/prop-types
@@ -23,7 +23,7 @@ function MainDisplay ({list, selectedRegion, countriesList}) {
 
     // To retrieve countries names
     // eslint-disable-next-line react/prop-types
-    const countries = list.map((country) => { return country.name.official})
+    const countries = countriesList.map((country) => { return country.name.official})
 
     // Function to handle region filter dropdown 
     const handleRegionFilter = (event) => {
@@ -37,6 +37,8 @@ function MainDisplay ({list, selectedRegion, countriesList}) {
     // Function to handle searching a country 
     const handleCountrySearch = (event, value) => {
         console.log(value);
+        setCountrySearch(value);
+        countrySearched(value);
     }
 
     return (
@@ -56,7 +58,7 @@ function MainDisplay ({list, selectedRegion, countriesList}) {
                         <FormControl sx={{  width: { xs: "100%", sm: "100%", md: "60%"} }}>
                             <InputLabel id="filter-region">Filter by Region</InputLabel>
                             <Select 
-                                disablePortal
+                                
                                 labelId="filter-region"  
                                 value = {region} 
                                 onChange={handleRegionFilter}
