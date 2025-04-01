@@ -1,15 +1,10 @@
 import { CardActionArea, CardMedia, Typography } from '@mui/material';
 import './CountryCard.scss';
-// import Card from '@mui/material/Card';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-// import Grid from '@mui/material/Grid';
-import { BrowserRouter, Routes, Route, Link , useNavigate} from 'react-router-dom';
-// import { Link } from re÷
-
-
+import { useNavigate} from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 function CountryCard ({list}) {
@@ -26,8 +21,6 @@ function CountryCard ({list}) {
                         // eslint-disable-next-line react/prop-types
                         list.map((country) => (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={country.cca3} >
-                            {/* return ( */}
-                                    
                                     <Card  sx={{ boxShadow: '0 0 12px  rgba(0, 0, 0, 0.1)' , borderRadius: 2 , }}>
                                         <CardActionArea onClick={handleCountrySelect}>
                                             <CardMedia component="img" sx={{ height: "30vh"}} image={country.flags.svg} alt={`${country.name.common} flag`}/>
@@ -39,7 +32,6 @@ function CountryCard ({list}) {
                                             </CardContent>
                                         </CardActionArea>
                                     </Card> 
-                            {/* ) */}
                             </Grid>
                         ))      
         }

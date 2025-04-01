@@ -9,17 +9,18 @@ import { useState } from 'react';
 import { Container, Menu } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import SearchIcon from '@mui/icons-material/Search';
 
 // eslint-disable-next-line react/prop-types
 function MainDisplay ({list, selectedRegion, countriesList, countrySearched}) {
 
-    const [region, setRegion] = useState("");
+    const [region, setRegion] = useState("All Regions");
     const [countrySearch, setCountrySearch] = useState("");
 
     // To extract unique regions
     // eslint-disable-next-line react/prop-types
     const regions = countriesList.map((country) => { return country.region })
-    const uniqueRegions = ["All", ...new Set(regions)];
+    const uniqueRegions = ["All Regions", ...new Set(regions)];
 
     // To retrieve countries names
     // eslint-disable-next-line react/prop-types
@@ -38,41 +39,42 @@ function MainDisplay ({list, selectedRegion, countriesList, countrySearched}) {
     // Function to handle searching a country 
     const handleCountrySearch = (event, value) => {
         console.log(value);
-        setRegion('');
+        setRegion("All Regions");
         setCountrySearch(value);
         countrySearched(value);
     }
 
     return (
             <Container disableGutters maxWidth="xl" sx={{ p: { xs: "2rem 3rem", sm: "2rem 3rem", md: "3rem 8rem"}, display: "flex", flexWrap: "wrap", flexDirection: "column" }}>
-                <Box sx={{ display: "flex", flexDirection : { xs: "column", sm: "column", md: "row"}, gap: 2, width: "100%", justifyContent: "space-between", alignItems: "center"}}>
-                    <Box sx = {{ width: { xs: "100%", sm: "100%", md: "60%"}}}>
+                
+                <Box sx={{width: "100%", display: "flex", flexDirection : { xs: "column", sm: "column", md: "row"}, justifyContent: "space-between", alignItems: "center" }}>
+                    
+                    {/* <Box sx = {{ }}> */}
                         <Autocomplete 
                                 disablePortal 
                                 options={countries}
                                 onChange={handleCountrySearch}
+                                forcePopupIcon={false}
+                                // startIcon={ <SearchIcon /> }
                                 value={countrySearch}
-                                sx={{ width: { xs: "100%", sm: "100%", md: "60%"}}}
-                                renderInput={(params) => <TextField {...params} label="Search a Country Name" />}
-                        >
+                                sx={{ width: { xs: "100%", sm: "100%", md: "30%"}}}
+                                renderInput={(params) => <TextField {...params} label="Search a Country Name" />}>
                         </Autocomplete>
-                    </Box>
-                    <Box sx = {{ width: { xs: "100%", sm: "100%", md: "60%"}}}>
-                        <FormControl sx={{  width: { xs: "100%", sm: "100%", md: "60%"} }}>
-                            <InputLabel id="filter-region">Filter by Region</InputLabel>
-                            <Select 
-                                
+
+                        <Select sx={{  width: { xs: "100%", sm: "100%", md: "20%"} }}
                                 labelId="filter-region"  
                                 value = {region} 
-                                onChange={handleRegionFilter}
-                            >
+                                onChange={handleRegionFilter}>
                                 { uniqueRegions.map((region) => {
                                     return <MenuItem key={region} value={region}>{region}</MenuItem>
                                 })
                                 }
                             </Select>
-                        </FormControl>
-                    </Box>
+                    {/* </Box> */}
+                    
+                    {/* <Box sx = {{ width: { xs: "100%", sm: "100%", md: "60%"}}}> */}
+                        
+                    {/* </Box> */}
                 </Box>
                 <Box>
                     <CountryCard list = {list}></CountryCard>
