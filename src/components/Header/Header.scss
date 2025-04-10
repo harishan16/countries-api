@@ -1,25 +1,22 @@
-@use '../../styles/partials/mixins' as *;
-@use '../../styles/partials/variables' as *;
+// @use '../../styles/partials/mixins' as *;
+// @use '../../styles/partials/variables' as *;
 
-.header {
-    width: 100%;
-    height: 15vh;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+// .header {
+//     width: 100%;
+//     height: 15vh;
+//     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 
-    &__logo {
-        text-decoration: none;
-        color: inherit;
-        @include text-style (1.8rem, 700, 8rem);
-        padding-left: 2rem;
+//     &__logo {
+//         text-decoration: none;
+//         color: inherit;
+//         @include text-style (1.8rem, 700, 8rem);
+//         padding-left: 2rem;
 
         
-        @include tablet {
-            @include text-style (2.5rem, 700, 8rem);
-            padding-left: 8rem;
-        }
+//         @include tablet {
+//             @include text-style (2.5rem, 700, 8rem);
+//             padding-left: 8rem;
+//         }
 
-        // @include desktop {
-        //     @include text-style (2.5rem, 700, 8rem);
-        // }
-    }
-}
+//     }
+// }

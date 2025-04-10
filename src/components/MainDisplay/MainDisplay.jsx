@@ -13,7 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 // eslint-disable-next-line react/prop-types
 function MainDisplay ({list, selectedRegion, countriesList, countrySearched}) {
-
+    
     const [region, setRegion] = useState("All Regions");
     const [countrySearch, setCountrySearch] = useState("");
 
@@ -45,6 +45,7 @@ function MainDisplay ({list, selectedRegion, countriesList, countrySearched}) {
     }
 
     return (
+     
             <Container disableGutters maxWidth="xl" sx={{ p: { xs: "2rem 3rem", sm: "2rem 3rem", md: "3rem 8rem"}, display: "flex", flexWrap: "wrap", flexDirection: "column" }}>
                 
                 <Box sx={{width: "100%", display: "flex", flexDirection : { xs: "column", sm: "column", md: "row"}, justifyContent: "space-between", alignItems: "center" }}>

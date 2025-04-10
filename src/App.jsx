@@ -1,21 +1,66 @@
-// import { BrowserRouter } from 'react-router-dom'÷
-import './App.scss'
+// import './App.scss'
 import Header from './components/Header/Header'
 import CountryDetails from './components/CountryDetails/CountryDetails'
-// import MainDisplayPage from './pages/MainDisplayPage/MainDisplayPage'
 import MainDisplay from './components/MainDisplay/MainDisplay';
-
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, responsiveFontSizes } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "'Nunito Sans', sans-serif",
+    fontSize: 14, // base font size in px (usually 14 or 16)
+    h1: {
+      fontSize: '3rem',
+    },
+    h2: {
+      fontSize: '2.25rem',
+    },
+    h3: {
+      fontSize: '1.875rem',
+    },
+    h4: {
+      fontSize: '1.5rem',
+    },
+    h5: {
+      fontSize: '1rem',
+    },
+    body1: {
+      fontSize: '1rem',
+    },
+    body2: {
+      fontSize: '0.875rem',
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: '#fff',
+          color: '#000'
+        },
+        a: {
+          textDecoration: 'none',
+          color: 'inherit',
+        },
+      },
+    },
+  },
+});
 
 
-const url = "https://restcountries.com/v3.1/all";
+const allCountriesUrl = "https://restcountries.com/v3.1/all";
 
 function App() {
 
+  // console.log(params);
+
+
   const [countriesList, setCountriesList] = useState([]);
+  const [countryDetails, setCountryDetails] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -33,13 +78,12 @@ function App() {
       setSearchedcountry(country);
   }
 
-  
-
   // Fetch all countries list
   useEffect(() => {
     const getAllCountries = async () => {
         try {
-            const {data} = await axios.get(url);
+            const {data} = await axios.get(allCountriesUrl);
+            console.log(data);
             setCountriesList(data);
             setIsError(false);
             setIsLoading(false);
@@ -108,22 +152,24 @@ if(isLoading) {
 
   return (
       <>
-      <BrowserRouter>
-      <Header></Header>
-        <Routes>
-            <Route path="/" element={
-              <MainDisplay list = {displayList} 
-                      selectedRegion= {handleSelectedRegion} 
-                      countriesList={countriesList}
-                      countrySearched={handleSearchedCountry}>
-              </MainDisplay>
-              } />
-            <Route path="/country-info" element={<CountryDetails />} />
-          
-        </Routes>
-      </BrowserRouter>
-       
-        
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+        <BrowserRouter>
+        <Header></Header>
+            <Routes>
+                <Route path="/" element={
+                <MainDisplay list = {displayList} 
+                        selectedRegion= {handleSelectedRegion} 
+                        countriesList={countriesList}
+                        countrySearched={handleSearchedCountry}>
+                </MainDisplay>
+                } />
+                <Route path="/country-info/name/:id" element={<CountryDetails />} />
+            
+            </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+      
       </>
   )
 }
